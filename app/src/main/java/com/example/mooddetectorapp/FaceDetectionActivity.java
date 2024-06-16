@@ -11,9 +11,10 @@ import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
@@ -26,9 +27,6 @@ import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
@@ -45,33 +43,47 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class FaceDetectionActivity extends AppCompatActivity {
 
     private ImageCapture imageCapture;
     private Interpreter tflite;
+    private Handler handler;
 
     private static final String TAG = "FaceDetectionActivity";
-
     private static final int MODEL_INPUT_SIZE = 48;
-    private static final int OUTPUT_CLASSES = 7;
+    private static final int OUTPUT_CLASSES = 8;
     private static final long DETECTION_DELAY = 5000; // 5 seconds delay
 
     private boolean isProcessing = false;
-    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_detection);
 
+        handler = new Handler();
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
         // Load TensorFlow Lite model
         loadModel();
 
         // Start camera
         startCamera();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (tflite != null) {
+            tflite.close();
+            tflite = null;
+        }
     }
 
     private void startCamera() {
@@ -161,7 +173,7 @@ public class FaceDetectionActivity extends AppCompatActivity {
 
     private Bitmap rotateBitmap(Bitmap bitmap, int degrees) {
         if (bitmap == null) {
-            Log.e("FaceDetectionActivity", "rotateBitmap: Bitmap is null");
+            Log.e(TAG, "rotateBitmap: Bitmap is null");
             return null;
         }
         Matrix matrix = new Matrix();
@@ -180,52 +192,42 @@ public class FaceDetectionActivity extends AppCompatActivity {
 
         FaceDetector detector = FaceDetection.getClient(options);
 
-        Task<List<Face>> result = detector.process(image)
-                .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
-                    @Override
-                    public void onSuccess(List<Face> faces) {
-                        imageProxy.close(); // Close the image proxy on success
-                        if (faces.isEmpty()) {
-                            Log.d(TAG, "No faces detected");
-                        } else {
-                            Log.d(TAG, "Faces detected: " + faces.size());
-                            for (Face face : faces) {
-                                // Process each face here
-                                detectEmotion(face, originalBitmap);
-                            }
+        detector.process(image)
+                .addOnSuccessListener(faces -> {
+                    imageProxy.close(); // Close the image proxy on success
+                    if (faces.isEmpty()) {
+                        Log.d(TAG, "No faces detected");
+                    } else {
+                        Log.d(TAG, "Faces detected: " + faces.size());
+                        for (Face face : faces) {
+                            detectEmotion(face, originalBitmap);
                         }
-                        resetProcessing();
                     }
+                    resetProcessing();
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        imageProxy.close(); // Close the image proxy on failure
-                        Log.e(TAG, "Face detection failed: " + e.getMessage(), e);
-                        Toast.makeText(FaceDetectionActivity.this, "Face detection failed", Toast.LENGTH_SHORT).show();
-                        resetProcessing();
-                    }
+                .addOnFailureListener(e -> {
+                    imageProxy.close(); // Close the image proxy on failure
+                    Log.e(TAG, "Face detection failed: " + e.getMessage(), e);
+                    Toast.makeText(FaceDetectionActivity.this, "Face detection failed", Toast.LENGTH_SHORT).show();
+                    resetProcessing();
                 });
     }
 
-    public float[] softmax(float[] logits) {
+    private float[] softmax(float[] logits) {
         float[] expValues = new float[logits.length];
         float sum = 0f;
 
-        // Calculate exp(logit) for each logit
         for (int i = 0; i < logits.length; i++) {
             expValues[i] = (float) Math.exp(logits[i]);
             sum += expValues[i];
         }
 
-        // Normalize by dividing by the sum of all exp(logit)
         for (int i = 0; i < logits.length; i++) {
             expValues[i] /= sum;
         }
 
         return expValues;
     }
-
 
     private void detectEmotion(Face face, Bitmap originalBitmap) {
         if (tflite == null) {
@@ -237,26 +239,21 @@ public class FaceDetectionActivity extends AppCompatActivity {
             Log.e(TAG, "Preprocessed input is null.");
             return;
         }
-        float[][] output = new float[1][8]; // Adjust to 8 if model has 8 outputs
+        float[][] output = new float[1][OUTPUT_CLASSES]; // Adjust to match the model's output shape
 
         tflite.run(input, output);
 
-        // Apply softmax to get probabilities
         float[] probabilities = softmax(output[0]);
 
-        // Log the probabilities
         for (int i = 0; i < probabilities.length; i++) {
-            Log.d("EmotionDetection", "Probability for index " + i + ": " + probabilities[i]);
+            Log.d(TAG, "Probability for index " + i + ": " + probabilities[i]);
         }
 
-        // Map probabilities to emotion labels
         String emotion = mapOutputToEmotionLabel(probabilities);
-        Log.d("EmotionDetection", "Detected emotion: " + emotion);
+        Log.d(TAG, "Detected emotion: " + emotion);
 
-        // Show emotion in a dialog
         showEmotionDialog(emotion);
     }
-
 
     private void showEmotionDialog(String emotion) {
         new AlertDialog.Builder(this)
@@ -334,7 +331,6 @@ public class FaceDetectionActivity extends AppCompatActivity {
         int maxIndex = 0;
         float maxProbability = probabilities[0];
 
-        // Find the index with the maximum probability
         for (int i = 1; i < probabilities.length; i++) {
             if (probabilities[i] > maxProbability) {
                 maxProbability = probabilities[i];
@@ -342,10 +338,8 @@ public class FaceDetectionActivity extends AppCompatActivity {
             }
         }
 
-        // Map index to emotion labels
         String[] emotionLabels = {"neutral", "happy", "surprised", "sad", "anger", "disgust", "fear", "contempt"};
 
         return emotionLabels[maxIndex];
     }
-
 }

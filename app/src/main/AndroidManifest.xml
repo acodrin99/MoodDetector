@@ -6,6 +6,7 @@
         android:name="android.hardware.camera"
         android:required="false" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -17,21 +18,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoodDetectorApp"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".FaceDetectionActivity"
             android:exported="true">
-            <!-- Add any other attributes as necessary -->
+        </activity>
+
+        <activity
+            android:name=".ChatActivity"
+            android:exported="true">
         </activity>
 
     </application>
-
 </manifest>

@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/taskTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Task Title"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="16sp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/taskDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/taskTitleTextView"
+        android:layout_marginTop="4dp"
+        android:text="Task Description"
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/taskPointsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="10 Points"
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/taskStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/taskDescriptionTextView"
+        android:layout_marginTop="4dp"
+        android:text="Not Completed"
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+</RelativeLayout>

@@ -4,6 +4,10 @@ public class ChatMessage {
     private String sender;
     private String message;
 
+    public ChatMessage() {
+        // No-argument constructor needed for Firestore deserialization
+    }
+
     public ChatMessage(String sender, String message) {
         this.sender = sender;
         this.message = message;

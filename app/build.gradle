@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,6 +40,8 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:1.0.0-alpha27"
     implementation "androidx.camera:camera-extensions:1.0.0-alpha27"
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.firebase:firebase-firestore:24.0.0'
     implementation 'com.google.mlkit:face-detection:16.1.6'
     implementation 'org.tensorflow:tensorflow-lite:2.5.0'
     implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'

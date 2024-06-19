@@ -1,5 +1,6 @@
 package com.example.mooddetectorapp;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +12,6 @@ import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -57,6 +57,7 @@ public class FaceDetectionActivity extends AppCompatActivity {
     private static final long DETECTION_DELAY = 5000; // 5 seconds delay
 
     private boolean isProcessing = false;
+    private boolean fromRewardTask = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +67,9 @@ public class FaceDetectionActivity extends AppCompatActivity {
         handler = new Handler();
 
         Button backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(v -> {
-            finish();
-        });
+        backButton.setOnClickListener(v -> onBackPressed());
+
+        fromRewardTask = getIntent().getBooleanExtra("fromRewardTask", false);
 
         // Load TensorFlow Lite model
         loadModel();
@@ -84,6 +85,12 @@ public class FaceDetectionActivity extends AppCompatActivity {
             tflite.close();
             tflite = null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Call finish to close the activity
+        finish();
     }
 
     private void startCamera() {
@@ -252,13 +259,31 @@ public class FaceDetectionActivity extends AppCompatActivity {
         String emotion = mapOutputToEmotionLabel(probabilities);
         Log.d(TAG, "Detected emotion: " + emotion);
 
-        showEmotionDialog(emotion);
+        if (fromRewardTask) {
+            if (emotion.equals("happy")) {
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            } else {
+                showEncouragementDialog(emotion);
+            }
+        } else {
+            showEmotionDialog(emotion);
+        }
     }
 
     private void showEmotionDialog(String emotion) {
         new AlertDialog.Builder(this)
                 .setTitle("Detected Emotion")
                 .setMessage("The detected emotion is: " + emotion)
+                .show();
+    }
+
+    private void showEncouragementDialog(String emotion) {
+        new AlertDialog.Builder(this)
+                .setTitle("Keep Trying")
+                .setMessage("The detected emotion is: " + emotion + ". Try to smile!")
+                .setPositiveButton("Okay", (dialog, which) -> dialog.dismiss())
                 .show();
     }
 

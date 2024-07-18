@@ -49,7 +49,7 @@ public class TaskAdapter extends BaseAdapter {
         titleTextView.setText(task.getTitle());
         descriptionTextView.setText(task.getDescription());
         pointsTextView.setText(String.valueOf(task.getRewardPoints()));
-        statusTextView.setText(task.getStatus());
+        statusTextView.setText(task.isCompleted() ? "Completed" : "Not Completed");
 
         return convertView;
     }

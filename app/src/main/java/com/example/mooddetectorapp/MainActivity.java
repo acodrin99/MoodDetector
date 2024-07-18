@@ -24,38 +24,44 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        welcomeTextView = findViewById(R.id.welcomeTextView);
+        welcomeTextView = findViewById(R.id.welcome_message);
 
-        Button startFaceDetectionButton = findViewById(R.id.startFaceDetectionButton);
+        Button startFaceDetectionButton = findViewById(R.id.btn_start_face_detection);
         startFaceDetectionButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FaceDetectionActivity.class);
             startActivity(intent);
         });
 
-        Button startChatButton = findViewById(R.id.startChatButton);
+        Button startChatButton = findViewById(R.id.btn_start_chat);
         startChatButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ChatActivity.class);
             startActivity(intent);
         });
 
-        Button infoButton = findViewById(R.id.infoButton);
+        Button infoButton = findViewById(R.id.btn_info);
         infoButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, InfoActivity.class);
             startActivity(intent);
         });
 
-        Button rewardButton = findViewById(R.id.rewardButton);
+        Button rewardButton = findViewById(R.id.btn_rewards);
         rewardButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RewardActivity.class);
             startActivity(intent);
         });
 
-        Button logoutButton = findViewById(R.id.logoutButton);
+        Button logoutButton = findViewById(R.id.btn_logout);
         logoutButton.setOnClickListener(v -> {
             mAuth.signOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        });
+
+        Button btnVoiceDetection = findViewById(R.id.btn_start_voice_detection);
+        btnVoiceDetection.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, VoiceDetectionActivity.class);
+            startActivity(intent);
         });
 
         updateWelcomeMessage();

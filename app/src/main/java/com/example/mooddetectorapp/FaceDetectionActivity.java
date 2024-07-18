@@ -246,7 +246,7 @@ public class FaceDetectionActivity extends AppCompatActivity {
             Log.e(TAG, "Preprocessed input is null.");
             return;
         }
-        float[][] output = new float[1][OUTPUT_CLASSES]; // Adjust to match the model's output shape
+        float[][] output = new float[1][OUTPUT_CLASSES];
 
         tflite.run(input, output);
 

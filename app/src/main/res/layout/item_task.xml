@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/task_background">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/taskTitleTextView"
@@ -9,8 +10,9 @@
         android:layout_height="wrap_content"
         android:text="Task Title"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="16sp"
-        android:textColor="@color/black" />
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_bold" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/taskDescriptionTextView"
@@ -19,7 +21,7 @@
         android:layout_below="@id/taskTitleTextView"
         android:layout_marginTop="4dp"
         android:text="Task Description"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/black" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -28,8 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:text="10 Points"
-        android:textSize="14sp"
-        android:textColor="@color/black" />
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_bold" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/taskStatusTextView"
@@ -38,6 +41,6 @@
         android:layout_below="@id/taskDescriptionTextView"
         android:layout_marginTop="4dp"
         android:text="Not Completed"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/black" />
 </RelativeLayout>

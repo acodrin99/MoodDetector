@@ -43,6 +43,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class FaceDetectionActivity extends AppCompatActivity {
@@ -54,10 +56,15 @@ public class FaceDetectionActivity extends AppCompatActivity {
     private static final String TAG = "FaceDetectionActivity";
     private static final int MODEL_INPUT_SIZE = 48;
     private static final int OUTPUT_CLASSES = 8;
-    private static final long DETECTION_DELAY = 5000; // 5 seconds delay
+    private static long DETECTION_DELAY = 1000; // 1 second delay
 
     private boolean isProcessing = false;
     private boolean fromRewardTask = false;
+
+    private FaceOverlayView faceOverlayView;
+    private List<Face> facesList = new ArrayList<>();
+    private List<String> emotionsList = new ArrayList<>();
+    private List<float[]> probabilitiesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,13 @@ public class FaceDetectionActivity extends AppCompatActivity {
         backButton.setOnClickListener(v -> onBackPressed());
 
         fromRewardTask = getIntent().getBooleanExtra("fromRewardTask", false);
+
+        if (fromRewardTask) {
+            DETECTION_DELAY = 3000;
+        }
+
+        // Initialize FaceOverlayView
+        faceOverlayView = findViewById(R.id.faceOverlayView);
 
         // Load TensorFlow Lite model
         loadModel();
@@ -137,7 +151,7 @@ public class FaceDetectionActivity extends AppCompatActivity {
             Bitmap originalBitmap = mediaImageToBitmap(mediaImage);
             if (originalBitmap != null) {
                 Log.d(TAG, "Successfully converted mediaImage to Bitmap");
-                Bitmap rotatedBitmap = rotateBitmap(originalBitmap, 270); // Rotate image by 90 degrees to correct orientation
+                Bitmap rotatedBitmap = rotateBitmap(originalBitmap, 270); // Rotate image by 270 degrees to correct orientation
                 detectFaces(image, inputImage, rotatedBitmap);
             } else {
                 Log.e(TAG, "Failed to convert mediaImage to Bitmap");
@@ -206,6 +220,9 @@ public class FaceDetectionActivity extends AppCompatActivity {
                         Log.d(TAG, "No faces detected");
                     } else {
                         Log.d(TAG, "Faces detected: " + faces.size());
+                        facesList.clear();
+                        emotionsList.clear();
+                        probabilitiesList.clear();
                         for (Face face : faces) {
                             detectEmotion(face, originalBitmap);
                         }
@@ -259,6 +276,12 @@ public class FaceDetectionActivity extends AppCompatActivity {
         String emotion = mapOutputToEmotionLabel(probabilities);
         Log.d(TAG, "Detected emotion: " + emotion);
 
+        facesList.add(face);
+        emotionsList.add(emotion);
+        probabilitiesList.add(probabilities);
+
+        faceOverlayView.setFaces(facesList, emotionsList, probabilitiesList, (PreviewView) findViewById(R.id.viewFinder));
+
         if (fromRewardTask) {
             if (emotion.equals("happy")) {
                 Intent resultIntent = new Intent();
@@ -267,16 +290,7 @@ public class FaceDetectionActivity extends AppCompatActivity {
             } else {
                 showEncouragementDialog(emotion);
             }
-        } else {
-            showEmotionDialog(emotion);
         }
-    }
-
-    private void showEmotionDialog(String emotion) {
-        new AlertDialog.Builder(this)
-                .setTitle("Detected Emotion")
-                .setMessage("The detected emotion is: " + emotion)
-                .show();
     }
 
     private void showEncouragementDialog(String emotion) {

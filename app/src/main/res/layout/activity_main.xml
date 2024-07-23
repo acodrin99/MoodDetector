@@ -52,14 +52,6 @@
             style="@style/ButtonStyle" />
 
         <Button
-            android:id="@+id/btn_start_voice_detection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="START VOICE DETECTION"
-            android:drawableLeft="@drawable/ic_voice"
-            style="@style/ButtonStyle" />
-
-        <Button
             android:id="@+id/btn_start_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

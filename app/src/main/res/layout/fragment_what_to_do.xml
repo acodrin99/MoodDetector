@@ -19,44 +19,59 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Here are some activities that can help you manage anxiety and depression:"
+            android:text="What can you do when all these things happen? Over time, these two pathologies have been constantly and diligently studied to see what can help improve the  mental health of a person suffering from anxiety or depression."
             android:textSize="16sp"
             android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. Exercise: Engage in physical activities such as walking, running, yoga, or dancing to release endorphins and improve mood."
+            android:text="Firstly, the benefits of therapy with a certified psychologist or psychotherapist are a wonderful help in managing your symptoms and the way you are thinking. It is very important to find a therapist with whom you feel you can communicate and who can help you on your journey with these issues."
             android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2. Mindfulness and Meditation: Practice mindfulness or meditation to calm your mind and reduce stress."
+            android:text="Other things that have been proven to be helpful include certain relaxation techniques based on deep, abdominal breathing. There are multiple videos that can guide you through various abdominal or diaphragmatic breathing techniques, which can help calm you down when you are stressed or anxious."
             android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3. Creative Activities: Engage in creative activities such as painting, drawing, writing, or playing a musical instrument."
+            android:text="Engaging in sports or any kind of outdoor physical activity is also beneficial for you. When we exercise, molecules called endorphins are released, which help improve our mood."
             android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4. Social Interaction: Spend time with friends and family to feel connected and supported."
+            android:text="Spending time in outside and connecting with nature is another beneficial method. Studies indicate that spending time in nature helps reduce cortisol levels, the stress hormone."
             android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="5. Hobbies: Engage in hobbies or activities that you enjoy, such as gardening, cooking, or reading."
+            android:text="Practicing activities such as yoga or meditation is also useful. They help you organize your thoughts and find the calm you need."
             android:textSize="16sp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Last but not least, socializing with friends or family and participating in certain social events can help you overcome certain mental states and more easily fight these problems."
+            android:textSize="16sp"
+            android:paddingBottom="16dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/what_to_do"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:paddingTop="16dp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -19,44 +19,87 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A balanced diet can have a significant impact on your mental health. Here are some dietary recommendations:"
+            android:text="Of course, what we eat can also influence anxiety and depression in various ways. Recent studies suggest that what we consume is directly linked to our mental state through the gut microbiome. The microbiome is a population of bacteria and microorganisms in our intestines that maintain substances such as serotonin (the happiness hormone) and dopamine (the reward hormone) in balance. When there is an imbalance in this population of bacteria, our mental health can also be affected."
             android:textSize="16sp"
             android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. Omega-3 Fatty Acids: Include sources of omega-3 fatty acids such as salmon, flaxseeds, and walnuts to support brain health."
+            android:text="Here are some things you can change in your diet to help your brain and body in the fight against anxiety and depression:"
+            android:textSize="16sp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Quit smoking, alcohol, and excessive coffee consumption."
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2. Fruits and Vegetables: Consume a variety of colorful fruits and vegetables to get essential vitamins and minerals."
+            android:text="2. Try to reduce fast food as much as possible."
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3. Whole Grains: Choose whole grains like brown rice, quinoa, and oats for sustained energy levels."
+            android:text="3. Limit the intake of unsaturated fats and trans fats (found in pastry products, margarine)."
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="4. Lean Protein: Incorporate lean protein sources such as chicken, turkey, beans, and legumes into your diet."
+            android:text="4. Reduce or eliminate sugar from your diet. Sugar causes inflammation in your body and destroys the population of bacteria in your gut. Try to eliminate sodas and commercial sweets, and eat foods with a low glycemic index."
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="5. Hydration: Drink plenty of water to stay hydrated and reduce fatigue and irritability."
+            android:text="5. Try to consume foods rich in antioxidants such as blueberries, broccoli, strawberries, watermelon, and various berries."
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. Eat foods rich in healthy omega-3 fats: fatty fish (like salmon), avocado, and different types of nuts."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7. Fermented foods are very helpful as they contain probiotics: kefir, pickles, kimchi, and miso."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8. You can drink teas made from various plants that help and have a calming effect: lavender, chamomile, linden, and lemon balm."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9. Certain spices are used to reduce inflammation: for example, turmeric and saffron."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/what_to_eat"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:paddingTop="16dp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -58,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-        Button btnVoiceDetection = findViewById(R.id.btn_start_voice_detection);
-        btnVoiceDetection.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, VoiceDetectionActivity.class);
-            startActivity(intent);
-        });
-
         updateWelcomeMessage();
     }
 

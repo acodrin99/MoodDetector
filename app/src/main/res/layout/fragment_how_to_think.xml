@@ -19,42 +19,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your thoughts play a crucial role in managing anxiety and depression. Here are some tips on how to think positively and constructively:"
+            android:text="The way we think has a profound impact on our mental health, significantly influencing our experiences of anxiety and depression. Our thoughts shape our perceptions, emotions, and behaviors, creating a cycle that can either exacerbate or alleviate psychological distress. Negative thinking patterns, such as catastrophizing, overgeneralizing, and focusing on the worst-case scenarios, can heighten feelings of anxiety and deepen depression."
             android:textSize="16sp"
             android:paddingBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. Practice Gratitude: Focus on the things you are grateful for and write them down regularly."
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2. Positive Affirmations: Use positive affirmations to challenge negative thoughts and boost self-esteem."
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="3. Mindfulness: Stay present in the moment and avoid dwelling on the past or worrying about the future."
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="4. Cognitive Restructuring: Identify and challenge cognitive distortions and replace them with balanced thoughts."
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5. Self-Compassion: Treat yourself with kindness and understanding, especially during difficult times."
+            android:text="Conversely, cultivating a more positive and balanced way of thinking can help combat these issues. Cognitive-behavioral strategies, such as reframing negative thoughts, practicing gratitude, and engaging in mindfulness, can foster a healthier mindset. By consciously shifting our thought patterns and challenging irrational beliefs, we can reduce the intensity of anxiety and depression, leading to improved overall well-being."
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
 

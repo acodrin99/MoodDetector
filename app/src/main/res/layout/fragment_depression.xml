@@ -23,7 +23,60 @@
             android:textSize="16sp"
             android:paddingBottom="16dp"/>
 
-        <!-- Additional content here -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Depression is an affective mood disorder in which the affected person may suffer from several symptoms that can interfere with social or occupational functioning. Depression can manifest in various ways, classified according to ICD-10:"
+            android:textSize="16sp"
+            android:paddingBottom="16dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Major Depressive Disorder - characterized by depressive episodes of varying severity that last more than 2 weeks. During a depressive episode, the person experiences a loss of interest in activities that previously brought them pleasure, early morning awakening around 3-4 AM, feelings of guilt, feelings of worthlessness, reduced appetite, and during the severe depressive episodes, suicidal thoughts and suicidal ideation."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Persistent Depressive Disorder - manifests similarly to the above, but the depressive symptoms last more than 2 years."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Bipolar Affective Disorder - characterized by alternating depressive episodes and manic episodes."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other variations of major depressive disorder include:"
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Seasonal Depression - predominantly during autumn and winter, due to a lack of exposure to sunlight."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Peripartum and Postpartum Depression - depression related to pregnancy."
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Depression with Psychotic Symptoms - where the affected person may experience delusions or hallucinations."
+            android:textSize="16sp"
+            android:paddingBottom="16dp"/>
     </LinearLayout>
 </ScrollView>
